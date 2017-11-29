@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Registro</title>
+  <!--Wen Jerom salva el proyecto -->
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="css/materialize.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body id="fondo-body">
+
+  <div class="container">
+
+  <div id="app">
+    <nav>
+      <div class="nav-wrapper black-opacity">
+        <form id="search-form" action="#" method="">
+          <div class="input-field">
+            <input id="search" type="search" required>
+            <label class="label-icon" for="search">
+              <i class="material-icons">search</i>
+            </label>
+            <i class="material-icons">close</i>
+          </div>
+        </form>
+      </div>
+    </nav>
+  </div>
+
+    <ul id="datos" class="collection" style="overflow: visible !important;">
+    </ul>
+    <div id="general-fab" class="fixed-action-btn horizontal click-to-toggle">
+      <a class="btn-floating btn-large red">
+        <i class="material-icons">more_vert</i>
+      </a>
+      <ul>
+        <li>
+          <a class="btn-floating blue">
+            <i class="material-icons modal-trigger" href="#modal1">person_add</i>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div id="check-fab" class="fixed-action-btn horizontal click-to-toggle hidden">
+      <a class="btn-floating btn-large green">
+        <i class="material-icons">send</i>
+      </a>
+    </div>
+
+ <!-- Modal agregar -->
+    <div id="modal1" class="modal">
+      <div class="modal-content">
+        <h4>Agregar invitado</h4>
+        <form id="form">
+          <div class="row">
+            <div class="input-field col s12">
+              <input placeholder="Jhon Doe" id="first_name" type="text" class="validate">
+              <label for="first_name">Nombre</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input placeholder="9991234567" id="phone" type="number" class="validate" data-length="10">
+              <label for="phone">Teléfono</label>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="modal-action modal-close waves-effect waves-green btn-flat" id="agregar">Agregar</button>
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
+      </div>
+    </div>
+    <!-- Modal editar -->
+    <div id="modal3" class="modal">
+      <div class="modal-content">
+        <h4>Editar invitado</h4>
+        <form id="form-edit">
+          <div class="row">
+            <div class="input-field col s12">
+              <input placeholder="Jhon Doe" id="first_name_edit" type="text" class="validate">
+              <label for="first_name">Nombre</label>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input placeholder="9991234567" id="phone_edit" type="number" class="validate" data-length="10">
+                <label for="phone">Teléfono</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s6 l6">
+                <input placeholder="No. invitados" id="num_edit" type="number" class="validate" data-length="2">
+                <label for="num_edit">No. invitados</label>
+              </div>
+              <div class="col s6 l6">
+              <label>Estados</label>
+                 <select class="browser-default" id="estados">
+                    <option value="" disabled selected>Elige un estado</option>
+                    <option value="0">Pendiente</option>
+                    <option value="1">Confirmado</option>
+                    <option value="2">Rechazado</option>
+                 </select>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat" id="editar">Aceptar</a>
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
+      </div>
+    </div>
+    <!-- Modal de enviar invitaciones -->
+    <div id="modal2" class="modal">
+      <div class="modal-content">
+        <h4>Enviar invitaciones</h4>
+        <p>¿Está seguro que desea enviar invitaciones a
+          <strong>todos?</strong>
+        </p>
+        <br>
+        <div class="progress">
+          <div class="indeterminate"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="enviar" class="modal-action modal-close waves-effect waves-green btn-flat green" style="color:white; width:50%;">Enviar</button>
+          <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat red" style="color:white; width:50%;">Cancelar</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <script src="js/jquery.js"></script>
+  <script src="js/materialize.min.js"></script>
+  <script src="js/registrof.js"></script>
+</body>
+
+</html>
+

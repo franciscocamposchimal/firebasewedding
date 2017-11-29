@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Invitación</title>
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Import Google Fonts-->
+  <link href="https://fonts.googleapis.com/css?family=Dancing+Script" rel="stylesheet">
+  <link rel="stylesheet" href="css/materialize.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animate.css">
+</head>
+
+<body id="body-invitacion">
+  <div class="container-fluid estilo-container">
+    <!--<img class="responsive-img ajust-img-invt" src="imgs/invitacion_2.jpg">-->
+    <h2>INSERTA INVITACION AQUI!!!</h2>
+    <div class="row">
+      <div class="col s12 ajust-name animated bouncelnRight">
+        <!--<img class="responsive-img ajust-img-etiqueta" src="imgs/etiqueta.png">-->
+        <h2>INSERTAR IMAGEN AQUI!!!</h2>
+        <!--<i class="material-icons icon-crzn">favorite_border</i>-->
+        <strong class="ajust-nombre-etiqueta" id="nombre"></strong>
+      </div>
+    </div>
+  </div>
+  <div id="footer-mio">
+    <div class="div-50">
+      <a class="waves-effect waves-light btn modal-trigger btn-clr-1" href="#modal1">¡SI!</a>
+    </div>
+    <div class="div-50">
+      <a class="waves-effect waves-light btn modal-trigger btn-clr-2 long-text" href="#modal3" id="cancelar">No, Gracias</a>
+    </div>
+  </div>
+
+  <!--Modales-->
+
+  <!--Modal 1-->
+  <div id="modal1" class="modal bottom-sheet modal-font modal1 ">
+    <div class="modal-content">
+      <p>INSERTA TU IMAGEN AQUI!!!!!!</p>
+      <!--<img class="responsive-img ajust-img" src="imgs/boda_2.jpg">-->
+      <h4>
+        <center>Texto Personalizado</center>
+      </h4>
+      <h4>
+        <center>Texto Personalizado</center>
+      </h4>
+      <p>
+        <center id="txt-estilo-2">Confirma tu asistencia con el número de personas con las que asistirás (inclúyete).</center>
+      </p>
+      <div class="row">
+        <form class="col s12">
+          <div class="row">
+            <di class="col s12">
+              <div class="input-field inline">
+                <input id="person" type="number" class="validate" />
+                <label for="person" data-error="wrong" data-success="right" id="txt-estilo-3"># de personas</label>
+              </div>
+            </di>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="modal-footer ajust-btns-footer-1">
+      <a class="waves-effect waves-light btn btn-2 modal-trigger modal-close btn-clr-1" href="#modal2" id="aceptar">Confirmar</a>
+      <!--<a class="waves-effect waves-light btn-large modal-trigger modal-close ajust-btns-acpt-mdl" href="#modal2" id="aceptar">Confirmar</a>-->
+    </div>
+  </div>
+  <!--Modal 2-->
+  <div id="modal2" class="modal modal2 modal-font">
+    <div class="modal-content">
+      <h2> INSERTAR IMAGEN AQUI!</h2>
+     <!-- <img class="responsive-img ajust-img" src="imgs/boda_2.jpg">-->
+      <h4>
+        <center>Gracias por tu confirmación</center>
+      </h4>
+      <h5>
+        <center>¡Te esperamos en la pista de baile!</center>
+      </h5>
+    </div>
+    <div class="modal-footer">
+      <a onclick="closer();" href="URL" class="waves-effect waves-light btn btn-2 modal-trigger modal-close btn-clr-1">Aceptar</a>
+      <!--<a onclick="closer();" href="URL" class="modal-action modal-close waves-effect waves-green btn-flat ajust-btns-acpt-mdl">Aceptar</a>-->
+    </div>
+  </div>
+  <!--Modal 3-->
+  <div id="modal3" class="modal modal-font">
+    <div class="modal-content">
+       <h2> INSERTAR IMAGEN PERSONALIZADA</h2>
+      <!--<img class="responsive-img ajust-img" src="imgs/boda_2.jpg">-->
+      <h5>
+        <center>No te preocupes,
+          <br>te tendremos presente.</center>
+      </h5>
+      <h4>
+        <center>¡Muchas Gracias!</center>
+      </h4>
+    </div>
+    <div class="modal-footer">
+      <a onclick="closer();" href="URL" class="waves-effect waves-light btn btn-2 modal-trigger modal-close btn-clr-1">Aceptar</a>
+      <!--<a onclick="closer();" href="URL" class="modal-action modal-close waves-effect waves-green btn-flat ajust-btns-acpt-mdl" id="" >Aceptar</a>-->
+    </div>
+  </div>
+  <script src="js/jquery.js"></script>
+  <script src="js/materialize.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.5.1/firebase.js"></script>
+  <script src="js/firebaseConfig.js"></script>
+  <script>
+    // Initialize Firebase
+    firebase.initializeApp(window.__FIREBASE_GLOBAL_VARIBLES)
+    //Guarda una referencia a la base de datos
+    var db = firebase.database();
+    var lista = db.ref('listaDev');
+
+    $(document).ready(function () {
+
+      $('.modal').modal({
+        dismissible: false
+      });
+
+      $('.modal1').modal({
+        dismissible: false, // Modal can be dismissed by clicking outside of the modal
+        startingTop: '0%', // Starting top style attribute
+        endingTop: '5%', // Ending top style attribute
+      });
+
+      var key = cryp();
+      console.log(key)
+      getUsuario(key);
+    });
+
+    function aceptar(user) {
+      $('#aceptar').on("click", function (event) {
+        event.preventDefault();
+
+        var numero = $('#person').val();
+        if (numero.length > 1){
+          user.update({
+          asistencia: 1,
+          invitados: numero
+          });
+        }else{
+          alert("Campo de número de invitados vacío, pofavor intentelo de nuevo");
+        }
+
+      });
+    }
+
+    function cancelar(user) {
+      $('#cancelar').on("click", function (event) {
+        event.preventDefault();
+
+        user.update({
+          asistencia: 2,
+          invitados: "0"
+        });
+      });
+    }
+
+    function getUsuario(key) {
+      lista.on("child_added", function (_snap) {
+        console.log(_snap.key.toLowerCase() === key)
+        if (_snap.key.toLowerCase() === key) {
+            var user = lista.child(_snap.key)
+            user.once("value", (snap) => {
+            var datos = snap.val();
+            $('#nombre').text(datos.nombre);
+            aceptar(user);
+            cancelar(user);
+          })
+        }
+      });
+    }
+
+    function cryp() {
+      const href = window.location.href.split("key=")[1]
+      return href
+    }
+
+    function getGET() {
+      var loc = document.URL;
+      if (loc.indexOf('?') > 0) {
+        // cogemos la parte de la url que hay despues del interrogante
+        var getString = loc.split('?')[1];
+        // obtenemos un array con cada clave=valor
+        var GET = getString.split('&');
+        var get = {};
+
+        // recorremos todo el array de valores
+        for (var i = 0, l = GET.length; i < l; i++) {
+          console.log("Antes: " + GET);
+          console.log("Array: " + GET[i]);
+          var tmp = GET[i].split('=');
+          get[tmp[0]] = unescape(decodeURI(tmp[1]));
+          console.log("Despues: " + tmp);
+        }
+        return get;
+      }
+    }
+
+    function closer() {
+      window.open('','_self').close()
+    }
+  </script>
+
+</body>
+
+</html>

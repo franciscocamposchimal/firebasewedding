@@ -1,0 +1,540 @@
+
+/*  ajustes index*/
+    .center-all{
+      text-align: center;
+    }
+    .contorno{
+      border: red solid 2px;
+    }
+    .color-green{
+      background-color:#C8E6C9;
+    }
+    .color-cyan{
+      background-color:#00BCD4;
+    }
+    .color-red{
+      background-color:#F44336;
+    }
+    .color-yellow{
+      background-color:#FFF9C4;
+    }
+    .color-teal{
+      background-color:#009688;
+      
+    }
+    .back-label{
+      background-color: rgba(41, 44, 44, 0.8);
+      color: white; 
+      width: 100%;
+      padding: 10px 0px 10px 0px
+    }
+    .margin{
+      margin-left: 5px;
+      margin-right: 5px;
+      padding: 50px 0px 0px 0px !important;
+    }
+    .push-2{
+     margin-top: 14% !important;
+     margin-left: 14% !important;
+    }
+
+.txt-white{
+    color: white;
+}
+.color-link{
+    color: black !important;
+}
+
+/* fin ajustes index*/
+
+#body-invitacion 
+{
+    height: 100vh !important;
+    overflow: hidden;
+}
+#fondo-body
+{
+  /* background: url('../imgs/boda.jpg') no-repeat fixed center;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+    background-size: cover;*/
+    height: 100vh !important;
+    width: 100% ;
+    overflow: scroll;
+}
+.black-opacity {
+    background-color: #000000 !important;
+    opacity: 0.6;
+  }
+/*Estilos en la app-->Cambios Omar*/
+.label-icon
+{
+    margin-top: -12px;
+}
+.dropdown-button
+{
+    margin-top: -10px;
+    color: black;
+}
+.ajuste-icon
+{
+    margin-top: 6px;
+    width: 100%;
+    font-size:11px;
+    font-size-adjust: 8px;
+}
+.ajuste-icon-2
+{
+    width: 50%;
+    margin-top: -20px;
+}
+.ajuste-icon-int
+{
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+.ajuste-icon-int-2
+{
+    display: inline-block;   
+}
+.numero
+{
+    width: 5%;
+    height: 100%;
+    display: block;
+    text-align: center;
+    margin-left: -2%;
+    color: red;
+}
+.padre
+{
+    margin-left: 7%;
+    margin-top: -65px;
+}
+.icon-reloj
+{
+    position: absolute;
+    margin-left: 65%;
+    margin-top: 20px;
+    width: 3%;
+    vertical-align: middle;
+    color: black;
+}
+.collection-item
+{
+    height: 62px;
+    max-height: 100px;
+    box-shadow: 2px 2px 5px #999;
+}
+
+/*Ajuste en invitación -  Parte inicial*/
+/*Fondo en la invitación*/
+.estilo-container
+{
+    width: 100%;
+    height: 90vh;
+}
+#footer-mio
+{
+    width: 100%;
+    height: 10vh;
+    text-align: center;
+}
+.ajust-img-invt/*----------------->Imagen de la Invitacón--*/
+{
+    position: absolute;
+    width: 100%;
+    height: 90vh !important;
+}
+/*
+.ajust-name
+{
+    position: absolute;
+    z-index: 1;
+    margin-top: 37% !important;
+    margin-left: 19% !important;
+    width: 42% !important;
+    height: 9%;
+    background: #E9EFEE;
+    color: black;
+    text-align: center;
+    font-size: 22px;
+    box-shadow: 2px 2px 5px #999;
+    font-family: 'Dancing Script', cursive;
+}
+.ajust-name
+{
+    transform: rotate(-8deg);
+        -webkit-transform: rotate(-8deg);
+        -moz-transform: rotate(-8deg);
+        -o-transform: rotate(-8deg);
+}
+*/
+
+.ajust-btns
+{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+#footer-mio > .div-50{
+    width: 50vw;
+    float: left;
+}
+#footer-mio > .div-50 > a{
+    width: 100%;
+    padding: 0px !important;
+}
+#footer-mio > .div-50 > a.long-text{
+    font-size: 15px !important;
+}
+#footer-mio > .div-50 > a.btn{
+    height: 10vh;
+}
+.btn
+{
+    line-height: 50px !important;
+}
+
+.btn-clr-1
+{
+    background-color: #72010c;
+    color: white;
+    font-family: Arial;
+    text-transform: none !important;
+}
+.btn-clr-2
+{
+    background-color: #636462;
+    color: white;
+    font-family: Arial;
+    font-size: 25px !important;
+    text-transform: none !important;
+}
+.btn-clr-1:hover
+{
+    background-color: #c5c5c5 !important;
+    border-radius: 10px;
+    color: black;
+    text-transform: capitalize !important;
+}
+.btn-clr-2:hover
+{
+    background-color: #c5c5c5 !important;
+    border-radius: 10px;
+    color: black;
+    text-transform: capitalize !important;
+}
+/**/
+.ajust-sld
+{
+    text-align: center;
+    font-size: 20px;
+}
+.modal-footer
+{
+    width: 100% !important;
+    height: 100% !important;
+    text-align: center !important;
+}
+.ajust-btns-acpt-mdl
+{
+    width: 37%;
+    background-color: #72010c;
+    border-radius: 10px;
+    color: white;
+    font-family: Arial;
+    text-transform: capitalize !important;
+    margin-left: 0px !important;
+    padding-left: 30px !important;
+    text-align: center !important;
+}
+.ajust-btns-cnc-mdl
+{
+    width: 37%;
+    background-color: #72010c;
+    border-radius: 10px;
+    color: white;
+    font-family: Arial;
+    text-transform: capitalize !important;
+}
+.ajust-img
+{
+    position: absolute;
+    opacity: 0.2;
+    width: 85%;
+    height: 80% !important;
+}
+#txt-estilo-1
+{
+    font-size: 25px !important;
+}
+#txt-estilo-2
+{
+    font-size: 20px !important;
+}
+#txt-estilo-3
+{
+    font-size: 19px !important;
+}
+.ajust-btns-footer-1
+{
+    margin-top: -20%;
+}
+/*-----*/
+.ajust-row
+{
+    margin-bottom: 0px !important;
+}
+.modal-font
+{
+    font-family: 'Dancing Script', cursive;
+}
+/*---*/
+.icon-crzn
+{
+    font-size: 60px !important;
+}
+.ajust-name
+{
+    position: absolute;
+    z-index: 1;
+    margin-top: 5% !important;
+    width: 100% !important;
+    text-align: center;
+    font-size: 22px;
+}
+.ajust-nombre-etiqueta
+{
+    font-size: 18px;
+    font-family: 'Dancing Script', cursive;
+    color:#603a17 ;
+    margin-left: -35% !important;
+}
+.ajust-name
+{
+    transform: rotate(-8deg);
+        -webkit-transform: rotate(-8deg);
+        -moz-transform: rotate(-8deg);
+        -o-transform: rotate(-8deg);
+}
+.icon-check
+{
+    position: absolute;
+    margin-left: 55%;
+    margin-top: 20px;
+    width: 3%;
+    color: blueviolet;
+}
+.icon-send
+{
+    position: absolute;
+    margin-left: 75%;
+    margin-top: -13px;
+}
+
+.icon-check.icon-check-checked
+{
+    position: absolute;
+    margin-left: 55%;
+    margin-top: 20px;
+    width: 3%;
+    color: green;
+}
+.hidden {
+    display: none;
+}
+/*@media screen and (max-width: 600px){
+*
+*
+
+.ajust-name
+{
+    position: absolute;
+    z-index: 1;
+    margin-top: 35% !important;
+    margin-left: 19% !important;
+    width: 42% !important;
+    height: 9%;
+    background: #E9EFEE;
+    color: black;
+    text-align: center;
+    font-size: 22px;
+    box-shadow: 2px 2px 5px #999;
+    font-family: 'Dancing Script', cursive;
+}
+
+}*/
+
+/*--------------------*/
+@media only screen and (max-width: 994px) {
+    .push-2{
+     margin-top: 0% !important;
+     margin-left: 0% !important;
+    
+    }
+}
+@media screen and (max-width: 480px)  and (orientation: portrait) {
+*
+*
+/*Estilos en la app-->Cambios Omar*/
+.label-icon
+{
+    margin-top: -12px;
+}
+.dropdown-button
+{
+    margin-top: -10px;
+    color: black;
+}
+.ajuste-icon
+{
+    margin-top: 6px;
+    width: 100%;
+    font-size:11px;
+    font-size-adjust: 8px;
+}
+.ajuste-icon-2
+{
+    width: 50%;
+    margin-top: -20px;
+}
+.ajuste-icon-int
+{
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+.ajuste-icon-int-2
+{
+    display: inline-block;   
+}
+.numero
+{
+    width: 5%;
+    height: 100%;
+    display: block;
+    text-align: center;
+    margin-left: -5%;
+    color: red;
+}
+.padre
+{
+    margin-left: 7%;
+    margin-top: -50px;
+}
+.icon-reloj
+{
+    position: absolute;
+    margin-left: 65%;
+    margin-top: 22px !important;
+    width: 3%;
+    vertical-align: middle;
+    color: black;
+}
+.collection-item
+{
+    height: 90%;
+    box-shadow: 2px 2px 5px #999;
+}
+
+}
+
+/*Ajuste en los Botones */
+
+.ajusteTexto
+{  
+ text-align: center;
+}
+.collection-custom {
+  margin: 0.5rem 0 0 0;
+  border: 1px solid #e0e0e0;
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+  border-bottom: 1px solid #e0e0e0;
+  width: 100%;
+}
+
+.collection-custom .collection-item-custom {
+  background-color: #fff;
+  line-height: 1.5rem;
+  padding: 10px 20px;
+  margin: 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+.ajuste-filtro
+{
+    margin-top: 1%;
+}
+.margen-btn
+{
+  margin-top: 30%;  
+}
+
+
+.fixed-tab-down {
+  position: fixed;
+  border: red solid 2px !important;
+  width: 80%;
+  bottom: 0;
+  margin-bottom: 0;
+  z-index: 997;
+}
+
+/*Aqui inicia Iphone 5*/
+@media (min-height: 568px), (min-width: 320px) and (orientation:portrait){
+
+
+.btn
+{
+    line-height: 55px !important;
+}
+
+}
+
+
+/*Aqui inicia Galaxy S5*/
+@media (min-height: 640px), (min-width: 360px) and (orientation:portrait){
+    
+.btn
+{
+    line-height: 63px !important;
+}
+
+}
+
+
+/*Aqui inicia Iphone 6*/
+@media (min-height: 667px), (min-width: 375px) and (orientation:portrait){
+
+.btn
+{
+    line-height: 70px !important;
+}
+
+}
+
+/*Aqui inicia Nexus 5X*/
+@media (min-height: 732px), (min-width: 412px) and (orientation:portrait){
+    
+.btn
+{
+    line-height: 73px !important;
+}
+}
+
+/*Aqui inicia Iphone 6 Plus*/
+@media (min-height: 736px), (min-width: 414px) and (orientation:portrait){
+
+.btn
+{
+    line-height: 75px !important;
+}
+}
+.btn-2
+{
+    line-height: 38px !important;
+}

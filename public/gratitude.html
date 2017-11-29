@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Registro</title>
+    <!--Wen Jerom salva el proyecto -->
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/materialize.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body id="fondo-body">
+
+    <div class="container">
+
+        <div id="app">
+            <nav>
+                <div class="nav-wrapper black-opacity">
+                    <form id="search-form" action="#" method="">
+                        <div class="input-field">
+                            <input id="search" type="search" required>
+                            <label class="label-icon" for="search">
+                                <i class="material-icons">search</i>
+                            </label>
+                            <i class="material-icons">close</i>
+                        </div>
+                    </form>
+                </div>
+            </nav>
+        </div>
+
+        <ul id="datos" class="collection" style="overflow: visible !important;">
+        </ul>
+
+    </div>
+    <script src="js/jquery.js"></script>
+    <script src="js/materialize.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.5.1/firebase.js"></script>
+    <script src="js/firebaseConfig.js"></script>
+    <script type="text/javascript">
+        firebase.initializeApp(window.__FIREBASE_GLOBAL_VARIBLES)
+        //Guarda una referencia a la base de datos
+        var db = firebase.database();
+        var lista = db.ref('listaDev');
+        var ref = lista;
+        var firebaseDatas = [];
+        var paraEnviarSMS = [];
+        var arrayInvitados = 0;
+
+        var loading = false;
+        var lastKey = null;
+
+        $(document).ready(function () {
+
+            $("#search-form").submit(function (e) {
+                e.preventDefault();
+            });
+            mostrarDatos();
+
+            $('.modal').modal({
+                dismissible: false, // Modal can be dismissed by clicking outside of the modal
+                startingTop: '0%', // Starting top style attribute
+                endingTop: '5%', // Ending top style attribute
+            });
+
+
+        });
+        function getSMSWithLink(link) {
+            return encodeURIComponent(`Hola! de nuevo! Gracias por tus regalos!`)
+        }
+
+        function mostrarDatos() {
+            ref.on("child_added", function (snap) {
+                // enviarDatos(snap);
+                  
+                var datos = snap.val();
+                var checkId = 'iconoCheck';
+
+                    var icono = "access_time";
+
+                    if (datos.asistencia == 1) {
+                        icono = "done";
+                    } else if (datos.asistencia == 2) {
+                        icono = "not_interested";
+                    }
+                    if (datos.asistencia == 1) {
+                        var dato = parseInt(datos.invitados);
+                        arrayInvitados = arrayInvitados + dato;
+                        $("#invitadosTotales > li > div > strong").text(arrayInvitados);
+                    }
+                    var filasMostrar = "";
+                    filasMostrar += '<li class="collection-item padre-li" id="remove' + snap.key + '" >' +
+                        '<div>' +
+                        '<div class="numero" style="visibility: hidden;">' +
+                        '<p>' + datos.mesa + ',' + datos.invitados + '</p>' +
+                        '</div>' +
+                        '<div class="padre">' +
+                        '<div class="icon-check">' +
+                        '<i id="' + checkId + '" class="material-icons"  style="visibility: hidden;">' + checkId + '</i>' +
+                        '</div>' +
+                        '<div class="icon-reloj">' +
+                        '<i class="material-icons">' + icono + '</i>' +
+                        '</div>' +
+                        '<div class="ajuste-icon">' +
+                        '<div class="ajuste-icon-int">' +
+                        '<i class="material-icons">face</i>' +
+                        '</div>' +
+                        '<div class="ajuste-icon-int-2">' +
+                        '<span class="title"> <strong>' + datos.nombre + '</strong> </span>' +
+                        '</div>' +
+                        '</div>' +
+                        '<a href="#" class="icon-send send" data-key="'+ snap.key + '"><i class="material-icons">send</i></a>' +
+                        '<br>' +
+                        '<div class="ajuste-icon-2">' +
+                        '<div class="ajuste-icon-int">' +
+                        '<i class="material-icons">phone_android</i>' +
+                        '</div>' +
+                        '<div class="ajuste-icon-int-2">' +
+                        '<span class="cel">' + datos.tel + '</span>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '</li>';
+
+                $('#datos').prepend(filasMostrar);
+
+                $('.send').on('click',function(){
+                        var URL = ''
+                        var url = `https://api.whatsapp.com/send?phone=521${datos.tel}&text=${getSMSWithLink(URL)}`
+                        window.open(url, '_blank')
+                });
+            });
+
+            buscar();
+
+        }
+
+        function buscar() {
+            $("#search").on("keyup", function () {
+                var searchTerm = $(this).val().toLowerCase();
+                $("#datos > li").each(function () {
+                    var lineaDatos = $(this).text().toLowerCase();
+                    if (lineaDatos.indexOf(searchTerm) === -1) {
+                        $(this).addClass("hidden");
+                    } else {
+                        $(this).removeClass("hidden");
+                    }
+                });
+            });
+        }
+
+    </script>
+</body>
+
+</html>

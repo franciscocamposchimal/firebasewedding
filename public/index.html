@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Menu</title>
+  <!--alertify -->
+
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="css/materialize.css">
+  <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body id="fondo-body">
+  <div class="custom-container">
+    <div class="row push-2">
+     
+      <div class="col s12 l2 center-all color-red margin">
+      <a class="color-link" href="invitaciones.html"><i class="large material-icons">present_to_all</i><br><div class="back-label">invitaciones</div></a> </div>
+      <div class="col s12 l2  center-all color-green margin">
+      <a class="color-link" href="registro.html"><i class="large material-icons">assignment</i><br><div class="back-label">Lista de invitados</div></a>  </div>
+      <div class="col s12 l2  center-all color-cyan margin">
+      <a class="color-link" href="mapa.html"><i class="large material-icons">map</i><br><div class="back-label">Croquis</div></a>  </div>
+      <div class="col s12 l2  center-all color-yellow margin">
+      <a class="color-link" href="gratitude.html"><i class="large material-icons">card_giftcard</i><br><div class="back-label">Agradecimientos</div></a> </div>
+      <div class="col s12 l2  center-all color-teal margin">
+      <a class="color-link" href="index.html"><i class="large material-icons ">event</i><br><div class="back-label">Eventos</div></a>  </div>
+    
+    </div>
+     <!-- Modal Trigger -->
+         <div data-target="modal1" class="modal-trigger"></div>
+  
+    <!-- Modal Structure -->
+    <div id="modal1" class="modal">
+  <div class="modal-content">
+    <h4>Log in</h4>
+    <form id="form">
+      <div class="row">
+        <div class="input-field col s12">
+          <input placeholder="Jhon Doe" id="user" type="text" class="validate">
+          <label for="user">User</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input placeholder="9991234567" id="pass" type="password">
+          <label for="pass">Password</label>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="modal-action modal-close waves-effect waves-green btn-flat" id="login">Entrar</button>
+  </div>
+    </div>
+
+  </div>
+  
+  <script src="js/jquery.js"></script>
+  <script src="js/materialize.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.5.1/firebase.js"></script>
+  <script src="js/indexf.js"></script>
+</body>
+</html>

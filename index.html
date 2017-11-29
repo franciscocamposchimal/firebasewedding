@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Registro</title>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/materialize.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+   <div class="navbar-fixed">
+              <nav>
+                <div class="nav-wrapper">
+                  <form>
+                    <div class="input-field">
+                      <input id="search" type="search" required>
+                      <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                      <i class="material-icons">close</i>
+                    </div>
+                  </form>
+                </div>
+              </nav>    
+  </div>         
+    <div class="container">
+            
+            <table class="bordered centered">
+                
+                    <thead>
+                                        <tr>
+                                            <th>
+                                                    <i class="material-icons">person_pin</i>
+                                            </th>
+                                            <th>
+                                                    <i class="material-icons">phone_android</i>
+                                            </th>
+                                            <th>
+                                                    <i class="material-icons">people</i>
+                                            </th>
+                                            <th>opciones</th>
+                                        </tr>
+                    </thead>
+                                
+                    <tbody>
+                      <tr>
+                        <td>Alvin Campos</td>
+                        <td>99900897654</td>
+                        <td>7</td>
+                        <td>
+                             <a class="dropdown-button btn" href="#" data-activates="dropdown1"> <i class="material-icons">open_in_new</i> </a>
+                             <!-- Dropdown Structure -->
+                                    <ul id="dropdown1" class="dropdown-content">
+                                            <li><a href="#!">Editar</a></li>
+                                            <li><a href="#!">Eliminar</a></li>
+                                     </ul>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Alan Chimal</td>
+                        <td>9999456677</td>
+                        <td>
+                                <i class="material-icons">alarm</i>
+                        </td>
+                        <td>
+                                <a class="dropdown-button btn" href="#" data-activates="dropdown2"> <i class="material-icons">open_in_new</i> </a>
+                                <!-- Dropdown Structure -->
+                                       <ul id="dropdown2" class="dropdown-content">
+                                               <li><a href="#!">Editar</a></li>
+                                               <li><a href="#!">Eliminar</a></li>
+                                        </ul>
+                           </td>
+                      </tr>
+                      <tr>
+                        <td>Jonathan Acea</td>
+                        <td>9993446677</td>
+                        <td>
+                                <i class="material-icons">close</i>
+                        </td>
+                        <td>
+                                <a class="dropdown-button btn" href="#" data-activates="dropdown3"> <i class="material-icons">open_in_new</i> </a>
+                                <!-- Dropdown Structure -->
+                                       <ul id="dropdown3" class="dropdown-content">
+                                               <li><a href="#!">Editar</a></li>
+                                               <li><a href="#!">Eliminar</a></li>
+                                        </ul>
+                           </td>
+                      </tr>
+                     
+                    </tbody>
+</table>
+             <div class="fixed-action-btn horizontal">
+                            <a class="btn-floating btn-large red">
+                              <i class="large material-icons">add</i>
+                            </a>
+                            <ul>
+                              <li><a class="btn-floating green"><i class="material-icons modal-trigger" href="#modal2" >send</i></a></li>
+                              <li><a class="btn-floating blue"><i class="material-icons modal-trigger" href="#modal1" >person_add</i></a></li>
+                            </ul>
+                    </div>
+                   
+                  <!-- Modal agregar -->
+                <div id="modal1" class="modal">
+                      <div class="modal-content">
+                            <h4>Agregar invitado</h4>
+                            <div class="row"> 
+                                    <div class="input-field col s12"> 
+                                        <input placeholder="Jhon Doe" id="first_name" type="text" class="validate">
+                                        <label for="first_name">Nombre</label>
+                                    </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                  <input placeholder="9999-08-64-79" id="phone" type="number" class="validate">
+                                  <label for="phone">Teléfono</label>
+                                </div> 
+                            </div>                                         
+                           </div>
+                       </div>
+                <div class="modal-footer">
+                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agregar</a>
+                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
+                </div>
+             </div>  
+               <!-- Modal de enviar invitaciones -->
+               <div id="modal2" class="modal">
+                    <div class="modal-content">
+                          <h4>Enviar invitaciones</h4>
+                         <p>¿Está seguro que desea enviar invitaciones a  <strong>todos?</strong> </p><br>
+                         <div class="progress">
+                                <div class="indeterminate"></div>
+                         </div>
+              <div class="modal-footer">
+                  <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat green" style="color:white;">Enviar</a>
+                  <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat red" style="color:white;">Cancelar</a>
+              </div>
+              
+              </div>
+           </div>            
+ </div>
+    <script src="js/jquery.js"></script>
+    <script src="js/materialize.min.js"></script>
+    <script>
+            $( document ).ready(function() {
+                $('.modal').modal({
+                    dismissible: false
+                })
+            });
+            
+    </script>
+
+    <script src="https://www.gstatic.com/firebasejs/4.5.1/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyBI42NuOAQbmOYcWuLebwbvIA_KsMS3KPM",
+        authDomain: "app-mypartybridge.firebaseapp.com",
+        databaseURL: "https://app-mypartybridge.firebaseio.com",
+        projectId: "app-mypartybridge",
+        storageBucket: "",
+        messagingSenderId: "494980264469"
+      };
+      firebase.initializeApp(config);
+      //Guarda una referencia a la base de datos
+      var db = firebase.database();
+      
+    </script>
+    
+</body>
+</html>

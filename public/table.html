@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mesas</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.red-pink.min.css" />
+  <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    header {
+      position: fixed;
+      top: 0px;
+      left: 0px;
+      right: 0px;
+    }
+
+    .flex {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+          -ms-flex-direction: column;
+              flex-direction: column;
+      min-height: 100vh;
+      max-width: 100vw;
+      padding-top: 64px;
+      padding: 64px 20px 0px 20px;
+      -webkit-box-flex: 1;
+          -ms-flex: 1;
+              flex: 1;
+      background-color: #fafafa;
+    }
+
+    .flex-row {
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: normal;
+          -ms-flex-direction: row;
+              flex-direction: row;
+    }
+
+    .align-items-center {
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+    }
+
+    .justify-content-center {
+      -webkit-box-pack: center;
+          -ms-flex-pack: center;
+              justify-content: center;
+    }
+
+    .paper-white {
+      background-color: white;
+      border-radius: 2px;
+    }
+
+    .fab {
+      position: fixed;
+      bottom: 16px;
+      right: 16px;
+    }
+
+    .demo-list-control {
+      overflow-y: scroll;
+      max-height: 144px;
+    }
+
+    .demo-list-control::-webkit-scrollbar {
+      max-width: 10px;
+    }
+
+    .mdl-mini-footer {
+      padding: 18px 16px;
+    }
+
+    @media screen and (max-width: 1024px) {
+      .mdl-layout__header {
+        display: initial !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="mdl-layout__header mdl-layout__header--waterfall mdl-shadow--4dp">
+    <div class="mdl-layout__header-row">
+      <a href="mapa.html" class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">arrow_back</i>
+      </a>
+      <span class="mdl-layout-title">Wedding Planning</span>
+    </div>
+  </header>
+  <div class="flex">
+    <ul id="flatlist" class="demo-list-three mdl-list paper-white"></ul>
+    <dialog class="mdl-dialog">
+      <h4 class="mdl-dialog__title">Agregar Invitados a la Mesa</h4>
+      <form>
+        <div class="mdl-dialog__content">
+          <ul id="invitelist" class="demo-list-control mdl-list"></ul>
+        </div>
+        <div class="mdl-dialog__actions">
+          <input type="submit" id="save-dialog" class="mdl-button" value="Agree"></button>
+          <button id="cancel-dialog" type="button" class="mdl-button close">Disagree</button>
+        </div>
+      </form>
+    </dialog>
+    <button id="open-dialog" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored fab">
+      <i class="material-icons">add</i>
+    </button>
+  </div>
+  <div id="demo-toast-example" class="mdl-js-snackbar mdl-snackbar">
+    <div class="mdl-snackbar__text"></div>
+    <button class="mdl-snackbar__action" type="button"></button>
+  </div>
+  <footer class="mdl-mini-footer mdl-shadow--6dp">
+    <div class="mdl-mini-footer__left-section">
+      <div class="mdl-logo">Made by DWLab</div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.4/lodash.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/immutable/3.8.2/immutable.min.js"></script>
+  <script src="https://rubaxa.github.io/Sortable/Sortable.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.5.1/firebase.js"></script>
+  <script src="js/jquery.js"></script>
+  <script src="js/firebaseConfig.js"></script>
+  <script type="text/javascript">
+    "use strict";
+
+    firebase.initializeApp(window.__FIREBASE_GLOBAL_VARIBLES)
+
+    const db = firebase.database()
+    const ref = db.ref('listaDev')
+
+    let firebaseData = Immutable.List()
+    let selectedItems = Immutable.List()
+
+    ref.on('child_added', snap => {
+      const invitado = snap.val()
+      const contextMesa = getContextMesa()
+
+      if (invitado.asistencia !== 1) return true
+      if (invitado.mesa !== contextMesa) {
+        pushDeltaState(Object.assign({}, invitado, { _id: snap.key }))
+        return render()
+      }
+
+      pushState(Object.assign({}, invitado, { _id: snap.key }))
+      return render()
+    })
+
+    ref.on('child_changed', snap => {
+      const invitado = snap.val()
+      const contextMesa = getContextMesa()
+      const hasChange = firebaseData.findIndex(x => snap.key === x.get('_id'))
+      const exileKey = selectedItems.findIndex(x => snap.key === x.get('_id'))
+
+      if (invitado.asistencia !== 1) return true
+      if (hasChange < 0) {
+        if (invitado.mesa !== contextMesa) {
+          pushDeltaState(Object.assign({}, invitado, { _id: snap.key }))
+        } else {
+          selectedItems = selectedItems.removeIn([exileKey])
+          pushState(Object.assign({}, invitado, { _id: snap.key }))
+        }
+      } else {
+        if (invitado.mesa !== contextMesa) {
+          selectedItems = selectedItems.push(firebaseData.getIn([hasChange]))
+          firebaseData = sortState(firebaseData.removeIn([hasChange]))
+        } else {
+          const update = Object.assign({}, invitado, { _id: snap.key })
+          firebaseData = sortState(
+            firebaseData.map(x => {
+              if (snap.key !== x.get('_id')) return x
+              return Immutable.Map(update)
+            })
+          )
+        }
+      }
+
+      render()
+    })
+
+    function pushState (state) {
+      firebaseData = firebaseData.push(
+        Immutable.Map(state)
+      )
+      .sort((a, b) => {
+        const aLugar = a.get('lugar')
+        const bLugar = b.get('lugar')
+        if (aLugar < bLugar) return -1
+        if (aLugar > bLugar) return 1
+        if (aLugar === bLugar) return 0
+      })
+    }
+
+    function pushDeltaState (state) {
+      selectedItems = selectedItems.push(Immutable.Map(state))
+    }
+
+    function sortState (list) {
+      return list.sort((a, b) => {
+        const aLugar = a.get('lugar')
+        const bLugar = b.get('lugar')
+        if (aLugar < bLugar) return -1
+        if (aLugar > bLugar) return 1
+        if (aLugar === bLugar) return 0
+      })
+    }
+
+    function firebaseUpdateKey (key, data) {
+      ref.child(key).update(data)
+    }
+
+    function getContextMesa () {
+      return parseInt(_.get(window.location.href.split('?key=area-'), '1') || -1)
+    }
+
+    function showSnack ({ message = 'Hola mundo', timeout = 500 }) {
+      const snackbarContainer = document.querySelector('#demo-toast-example')
+      snackbarContainer.MaterialSnackbar.showSnackbar({ message, timeout})
+    }
+
+    function _onEnd (event) {
+      const oldIndexItem = firebaseData.get(event.oldIndex).toJS()
+      const newIndexItem = firebaseData.get(event.newIndex).toJS()
+      firebaseUpdateKey(oldIndexItem._id, { lugar: event.newIndex })
+      firebaseUpdateKey(newIndexItem._id, { lugar: event.oldIndex })
+    }
+
+    function main () {
+      document.querySelector('#cancel-dialog').addEventListener('click', () => dialog.close())
+      document.querySelector('#save-dialog').addEventListener('click', () => dialog.close())
+
+      Sortable.create(document.querySelector('#flatlist'), { onEnd: _onEnd })
+
+      const button = document.querySelector('#open-dialog')
+      const dialog = document.querySelector('dialog')
+      const form = document.querySelector('form')
+
+      button.addEventListener('click', () => dialog.showModal())
+      form.addEventListener('submit', handleUpdateElement)
+      render()
+    }
+
+    function handleUpdateElement (event) {
+      event.preventDefault()
+      const formData = $(event.target).serializeArray()
+      formData.forEach(x => {
+        const name = x.name
+        const value = name.replace('list-checkbox-', '')
+        firebaseUpdateKey(value, { mesa: getContextMesa(), lugar: firebaseData.size + 1 })
+        showSnack({ message: 'Se ha actualizado la lista' })
+      })
+    }
+
+    function handleRemoveElement (key) {
+      const confirm = window.confirm('Esta seguro que deseas eliminar al invitado de la lista')
+      if (confirm) {
+        firebaseUpdateKey(key, { lugar: 0, mesa: 0 })
+        showSnack({ message: 'Se ha eliminado al invitado de la mesa' })
+      }
+      return false
+    }
+
+    function render () {
+      document.querySelector('#flatlist').innerHTML = _.map(firebaseData.toJS(), renderInvite)
+      document.querySelector('#invitelist').innerHTML = _.map(selectedItems.toJS(), renderInviteCheck)
+      return true
+    }
+
+    function renderInvite (invitado = {}) {
+      return `<li data-key="${invitado._id}" class="mdl-list__item mdl-list__item--three-line">
+        <span class="mdl-list__item-primary-content">
+          <i class="material-icons mdl-list__item-avatar">person</i>
+          <span>${invitado.nombre}</span>
+          <span class="mdl-list__item-text-body">
+            Telefono: ${invitado.tel}<br/>
+            Mesa: ${invitado.mesa}
+          </span>
+        </span>
+        <span class="mdl-list__item-secondary-content">
+          <button onclick="handleRemoveElement('${invitado._id}')" class="mdl-button mdl-js-button mdl-button--icon">
+            <i class="material-icons">clear</i>
+          </button>
+        </span>
+      </li>`
+    }
+
+    function renderInviteCheck (invitado = {}) {
+      return `<li class="mdl-list__item">
+        <span class="mdl-list__item-primary-content">
+          <i class="material-icons  mdl-list__item-avatar">person</i>
+          ${invitado.nombre}
+        </span>
+        <span class="mdl-list__item-secondary-action">
+          <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-${invitado._id}">
+            <input type="checkbox" name="list-checkbox-${invitado._id}" id="list-checkbox-${invitado._id}" class="mdl-checkbox__input" />
+          </label>
+        </span>
+      </li>`
+    }
+
+    main()
+  </script>
+</body>
+
+</html>

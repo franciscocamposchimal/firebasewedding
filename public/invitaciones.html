@@ -1,0 +1,539 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Invitados</title>
+  <!--Wen Jerom salva el proyecto -->
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="css/materialize.css">
+  <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body id="fondo-body">
+
+  <div class="container">
+    <div id="app">
+    <nav>
+      <div class="nav-wrapper black-opacity">
+        <form id="search-form" action="#" method="">
+          <div class="input-field">
+            <input id="search" type="search" required>
+            <label class="label-icon" for="search">
+              <i class="material-icons">search</i>
+            </label>
+            <i class="material-icons">close</i>
+          </div>
+        </form>
+      </div>
+    </nav>
+  </div>
+  <div class="row">
+     <div class="col s6 l6">
+       <ul class="collection-custom" id="invitadosTotales">
+        <li class="collection-item-custom dismissable">
+          <div class="ajusteTexto">
+            <strong>0</strong>&nbsp
+            <span>Invitados confirmados al evento </span>
+          </div>
+        </li>
+    </ul>
+     </div>
+      <div class="col s6 l6 ajuste-filtro">
+                 <select class="browser-default" id="busquedaR">
+                    <option value="" selected>Ver todos</option>
+                    <option value="access_time">Pendiente</option>
+                    <option value="done">Confirmado</option>
+                    <option value="not_interested">Rechazado</option>
+                 </select>
+       </div>
+  </div>
+
+    <ul id="datos" class="collection" style="overflow: visible !important;">
+
+    </ul>
+    <div id="general-fab" class="fixed-action-btn horizontal click-to-toggle">
+      <a class="btn-floating btn-large red">
+        <i class="material-icons">more_vert</i>
+      </a>
+      <ul>
+        <li>
+          <a class="btn-floating green">
+            <i class="material-icons modal-trigger" href="#modal2">send</i>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div id="check-fab" class="fixed-action-btn horizontal click-to-toggle hidden">
+      <a class="btn-floating btn-large green">
+        <i class="material-icons">send</i>
+      </a>
+    </div>
+
+ <!-- Modal agregar -->
+    <div id="modal1" class="modal">
+      <div class="modal-content">
+        <h4>Agregar invitado</h4>
+        <form id="form">
+          <div class="row">
+            <div class="input-field col s12">
+              <input placeholder="Jhon Doe" id="first_name" type="text" class="validate">
+              <label for="first_name">Nombre</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input placeholder="9991234567" id="phone" type="number" class="validate" data-length="10">
+              <label for="phone">Tel�fono</label>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="modal-action modal-close waves-effect waves-green btn-flat" id="agregar">Agregar</button>
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
+      </div>
+    </div>
+    <!-- Modal editar -->
+    <div id="modal3" class="modal">
+      <div class="modal-content">
+        <h4>Editar invitado</h4>
+        <form id="form-edit">
+          <div class="row">
+            <div class="input-field col s12">
+              <input placeholder="Jhon Doe" id="first_name_edit" type="text" class="validate">
+              <label for="first_name">Nombre</label>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input placeholder="9991234567" id="phone_edit" type="number" class="validate" data-length="10">
+                <label for="phone">Teléfono</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s6 l6">
+                <input placeholder="No. invitados" id="num_edit" type="number" class="validate" data-length="2">
+                <label for="num_edit">No. invitados</label>
+              </div>
+              <div class="col s6 l6">
+              <label>Estados</label>
+                 <select class="browser-default" id="estados">
+                    <option value="" disabled selected>Elige un estado</option>
+                    <option value="0">Pendiente</option>
+                    <option value="1">Confirmado</option>
+                    <option value="2">Rechazado</option>
+                 </select>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat" id="editar">Aceptar</a>
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
+      </div>
+    </div>
+    <!-- Modal de enviar invitaciones -->
+    <div id="modal2" class="modal">
+      <div class="modal-content">
+        <h4>Enviar invitaciones</h4>
+        <p>¿Está seguro que desea enviar invitaciones a
+          <strong>todos?</strong>
+        </p>
+        <br>
+        <div class="progress">
+          <div class="indeterminate"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="enviar" class="modal-action modal-close waves-effect waves-green btn-flat green" style="color:white; width:50%;">Enviar</button>
+          <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat red" style="color:white; width:50%;">Cancelar</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <script src="js/jquery.js"></script>
+  <script src="js/materialize.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.5.1/firebase.js"></script>
+  <script src="js/jquery.md5.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.min.js"></script>
+  <script src="js/firebaseConfig.js"></script>
+  <script type="text/javascript">
+    firebase.initializeApp(window.__FIREBASE_GLOBAL_VARIBLES)
+    //Guarda una referencia a la base de datos
+    var db = firebase.database();
+    var lista = db.ref('listaDev');
+    var ref = lista;
+    var firebaseDatas = [];
+    var paraEnviarSMS = [];
+    var arrayInvitados= 0;
+
+    var loading = false;
+    var lastKey = null;
+
+    $(document).ready(function () {
+
+
+
+      $("#search-form").submit(function (e) {
+        e.preventDefault();
+      });
+      // alert(JSON.stringify(aray));
+      $('input#phone').characterCounter();
+      $('input#phone_edit').characterCounter();
+      $('select').material_select();
+      agregarDatos();
+      mostrarDatos();
+
+      $("#datos").on("click", ".borrar", elimina);
+      $("#datos").on("click", ".editar", editar);
+
+      $('.modal').modal({
+        dismissible: false, // Modal can be dismissed by clicking outside of the modal
+        startingTop: '0%', // Starting top style attribute
+        endingTop: '5%', // Ending top style attribute
+      });
+
+      $('#enviar').click(function (event) {
+        event.preventDefault();
+        var heAcept = confirm("Desea enviar las invitaciones a los invitados");
+        if (heAcept) {
+          for (i in firebaseDatas) {
+            const x = firebaseDatas[i]
+            console.log(x)
+            var longURL = "https://wedding-planning-2017.firebaseapp.com/invitacion.html?key="+x._id
+            var url = `https://api.whatsapp.com/send?phone=521${x.tel}&text=${getSMSWithLink(longURL)}`
+            window.open(url, '_blank')
+          }
+
+          return true
+        }
+      });
+
+      $('#check-fab').click(function (event) {
+        event.preventDefault();
+        var heAcept = confirm("Desea enviar las invitaciones a los invitados marcados");
+        if (heAcept) {
+          var arrayData = firebaseDatas
+            .filter(x => paraEnviarSMS.find(y => y.tel === x.tel))
+
+          for (i in arrayData) {
+            const x = arrayData[i]
+            var longURL = "https://wedding-planning-2017.firebaseapp.com/invitacion.html?key="+x._id;
+            var url = `https://api.whatsapp.com/send?phone=521${x.tel}&text=${getSMSWithLink(longURL)}`
+            window.open(url, '_blank')
+          }
+
+          return true
+          var deltaArrayData = arrayData.filter(x => paraEnviarSMS.find(y => y.tel === x.tel))
+          var datos = { "invitado": deltaArrayData };
+          var stringDatos = JSON.stringify(datos);
+          // XYZ.Contactos(stringDatos);
+
+
+          paraEnviarSMS.forEach(e => {
+            var checkId = 'iconoCheck' + e.key
+            $(`#${checkId}`).parent().removeClass('icon-check-checked');
+            $(`#${checkId}`)[0].innerHTML = 'check_box_outline_blank';
+          })
+
+          paraEnviarSMS = [];
+          verifyListAndToggleButtons();
+        }
+      });
+
+
+    });
+    function getSMSWithLink (link) {
+      return encodeURIComponent(`Hola! de nuevo! Confirma tu asistencia al evento click en el siguiente link: ${link}`)
+    }
+    function agregarDatos() {
+      $('#agregar').on("click", function (event) {
+        event.preventDefault();
+        var key = null;
+        var nombre = $('#first_name').val();
+        var numero = $('#phone').val();
+
+        if (nombre.length > 0 && (numero.length == 10)) {
+          lista.push({
+            asistencia: 0,
+            invitados: "1",
+            mesa: 0,
+            nombre: nombre,
+            tel: numero,
+            link: ''
+          }).then(snap => {
+            key = snap.key
+            return generateShortLink(snap.key, numero)
+          })
+          .then(link => {
+            lista.child(key).update({ link })
+             console.log(link);
+            $('#first_name').val("");
+            $('#phone').val("");
+          })
+        }
+
+      });
+    }
+
+    function generateShortLink (pass1, tel) {
+      return new Promise((resolve, reject) => {
+        var pass2 = $.md5(tel);//tel md5
+        var crypt = CryptoJS.AES.encrypt(pass1, pass2);//Este sera el pass1 donde pass1 es la key y el pass2 es el tel con md5
+        //  console.log("md5: "+pass2);
+        //  console.log("Crypt: "+crypt.toString());
+
+      var longURL = "https://wedding-planning-2017.firebaseapp.com/invitacion.html?key=" + crypt.toString() + "&pass2=" + pass2;
+        $.ajax({
+          url: 'https://www.googleapis.com/urlshortener/v1/url?key=AIzaSyBUqyOal-Z-NDM3zH5QzwU7oIdkngCCHQs',
+          type: 'POST',
+          contentType: 'application/json; charset=utf-8',
+          data: '{ longUrl: "' + longURL + '"}',
+          success: function (response) {
+            console.log(response)
+            var obj = { "tel": tel, "link": response.id };
+            resolve(response.id)
+          },
+          error: function (err) {
+            resolve('')
+            console.error(err)
+          }
+        });
+      })
+    }
+
+    function mostrarDatos() {
+      ref.on("child_added", function (snap) {
+        // enviarDatos(snap);
+
+        var datos = snap.val();
+        var checkId = 'iconoCheck' + snap.key;
+        var dataUpdate = Object.assign({_id: snap.key}, datos)
+        firebaseDatas.push(dataUpdate)
+
+        var icono = "access_time";
+        var iconoCheck = "check_box_outline_blank";
+
+        if (datos.asistencia == 1) {
+          icono = "done";
+        } else if (datos.asistencia == 2) {
+          icono = "not_interested";
+        }
+        if (datos.asistencia == 1){
+
+            // console.log(arrayInvitados);          
+             var dato = parseInt(datos.invitados);
+            // console.log(dato);
+             arrayInvitados = arrayInvitados + dato ;
+             parseInt(arrayInvitados);
+        $("#invitadosTotales > li > div > strong").text(arrayInvitados);
+        }
+        var filasMostrar = "";
+
+
+        filasMostrar += '<li class="collection-item padre-li" id="remove' + snap.key + '" >' +
+          '<div>' +
+          '<div class="numero">' +
+          '<p>' + datos.mesa + ',' + datos.invitados + '</p>' +
+          '</div>' +
+          '<div class="padre">' +
+          '<div class="icon-check">' +
+          '<i id="' + checkId + '" class="material-icons">' + iconoCheck + '</i>' +
+          '</div>' +
+          '<div class="icon-reloj">' +
+          '<i class="material-icons">' + icono + '</i>' +
+          '</div>' +
+          '<div class="ajuste-icon">' +
+          '<div class="ajuste-icon-int">' +
+          '<i class="material-icons">face</i>' +
+          '</div>' +
+          '<div class="ajuste-icon-int-2">' +
+          '<span class="title"> <strong>' + datos.nombre + '</strong> </span>' +
+          '</div>' +
+          '</div>' +
+          '<br>' +
+          '<div class="ajuste-icon-2">' +
+          '<div class="ajuste-icon-int">' +
+          '<i class="material-icons">phone_android</i>' +
+          '</div>' +
+          '<div class="ajuste-icon-int-2">' +
+          '<span class="cel">' + datos.tel + '</span>' +
+          '</div>' +
+          '</div>' +
+          '</div>' +
+          '</div>' +
+          '</li>';
+
+        $('#datos').prepend(filasMostrar);
+
+        $(`#${checkId}`).on('click', () => {
+          var inList = paraEnviarSMS.find(x => x.key === snap.key)
+          if (inList) {
+            paraEnviarSMS = paraEnviarSMS.filter(x => x.key !== snap.key);
+            $(`#${checkId}`).parent().removeClass('icon-check-checked');
+            $(`#${checkId}`)[0].innerHTML = 'check_box_outline_blank';
+          } else {
+            paraEnviarSMS.push({ key: snap.key, tel: datos.tel });
+            $(`#${checkId}`).parent().addClass('icon-check-checked');
+            $(`#${checkId}`)[0].innerHTML = 'check_box';
+          }
+          verifyListAndToggleButtons()
+        });
+
+        $(".dropdown-button").dropdown();
+
+      }, e => console.log(e.message));
+
+      buscar();
+      busquedaRapida();
+
+      ref.on("child_removed", function (snapshot) {
+        var datos = snapshot.val();
+        $("#remove" + snapshot.key).remove();
+        firebaseDatas = firebaseDatas.filter(x => x._id !== snapshot.key);
+        var dato = parseInt(datos.invitados);
+         if (datos.asistencia == 1) {
+        arrayInvitados = arrayInvitados - dato ;
+        $("#invitadosTotales > li > div > strong").text(arrayInvitados);
+         }
+      });
+
+      ref.on("child_changed", function (snapshot) {
+        var datos = snapshot.val();
+        $("li#remove" + snapshot.key + " span.title strong").text(datos.nombre);
+        $("li#remove" + snapshot.key + " span.cel").text(datos.tel);
+        $("li#remove" + snapshot.key + " div.numero p").text(datos.mesa + "," + datos.invitados);
+         var dato = parseInt(datos.invitados);
+        if (datos.asistencia == 1) {
+            arrayInvitados = arrayInvitados + dato;
+            $("#invitadosTotales > li > div > strong").text(arrayInvitados);
+        }else if(datos.asistencia == 2){
+           arrayInvitados = arrayInvitados - dato;
+          $("#invitadosTotales > li > div > strong").text(arrayInvitados);
+        }
+        var icono = "access_time";
+        if (datos.asistencia == 1) {
+          icono = "done";
+        } else if (datos.asistencia == 2) {
+          icono = "not_interested";
+        }
+        $("li#remove" + snapshot.key + " div.icon-reloj i").text(icono);
+
+        firebaseDatas = firebaseDatas.map(x => {
+          if (x._id === snapshot.key) {
+            return Object.assign({ _id: snapshot.key }, datos)
+          }
+          return x
+        });
+      });
+
+    }
+
+    function buscar() {
+      $("#search").on("keyup", function () {
+        var searchTerm = $(this).val().toLowerCase();
+        $("#datos > li").each(function () {
+          var lineaDatos = $(this).text().toLowerCase();
+          if (lineaDatos.indexOf(searchTerm) === -1) {
+            $(this).addClass("hidden");
+          } else {
+            $(this).removeClass("hidden");
+          }
+        });
+      });
+    }
+
+     function busquedaRapida() {
+      $("#busquedaR").on("change", function () {
+        var searchTerm = $('#busquedaR').val();
+        $("#datos > li").each(function () {
+          var lineaDatos = $(this).text().toLowerCase();
+          if (lineaDatos.indexOf(searchTerm) === -1) {
+            $(this).addClass("hidden");
+          } else {
+            $(this).removeClass("hidden");
+          }
+        });
+      });
+    }
+
+    function elimina(e) {
+      e.preventDefault();
+      var isConfirmed = confirm("Seguro que deseas eliminar al invitado")
+      if (!isConfirmed) return false
+      var keyidEliminar = $(this).attr("data-key");
+      var borraRef = lista.child(keyidEliminar);
+      borraRef.remove();
+    }
+
+    var stateKey = null;
+    function editar(e) {
+      e.preventDefault();
+
+      var keyidEditar = $(this).attr("data-keyedit");
+
+      var editarRef = lista.child(keyidEditar);
+      stateKey = keyidEditar;
+
+      editarRef.once("value", function (snap) {
+        var datos = snap.val();
+
+        $('#first_name_edit').val(datos.nombre);
+        $('#phone_edit').val(datos.tel);
+        $('#num_edit').val(datos.invitados);
+        $('#estados').val(datos.asistencia).prop('selected',true);
+        editarDatos(keyidEditar, datos.tel);
+      });
+    }
+
+    function editarDatos(key, tel) {
+      $('#editar').on("click", function (event) {
+        event.preventDefault();
+        if (stateKey !== key) return true;
+
+        var editar = lista.child(key);
+        // console.log(editar);
+        var nombre_edit = $('#first_name_edit').val();
+        var numero_edit = $('#phone_edit').val();
+        var invitados = $('#num_edit').val();
+        var estado = $('#estados').val();
+        generateShortLink(key, numero_edit)
+        .then(link => {
+           console.log(link)
+           editar.update({
+            link,
+            nombre: nombre_edit,
+            tel: numero_edit,
+            invitados: invitados,
+            asistencia: estado
+          })
+        })
+
+        stateKey = null;
+        // console.log(tel,numero_edit);
+      });
+    }
+
+    function verifyListAndToggleButtons() {
+      var isEmptyCheckList = paraEnviarSMS.length === 0
+      if (isEmptyCheckList) {
+        $("#general-fab").removeClass('hidden');
+        $("#check-fab").addClass('hidden');
+      } else {
+        $("#general-fab").addClass('hidden');
+        $("#check-fab").removeClass('hidden');
+      }
+    }
+
+
+  </script>
+</body>
+
+</html>
+
