@@ -5,7 +5,8 @@ $(document).ready(function () {
         dismissible: false
     });
 
-
+    var session = localStorage.getItem('uid');
+    console.log('Localstorage contiene: ', session);
 
     $('#modal1').modal('open');
 
@@ -23,15 +24,14 @@ $(document).ready(function () {
             success: function (data) {
                 console.log('response ',data.token);
                 localStorage.setItem('uid', JSON.stringify(data.token));
-                var nombre = localStorage.getItem('uid');
-                console.log('Localstorage: ', nombre);
             },
             error: function (xhr, status, errorThrown) {
-                localStorage.removeItem('uid');
+                localStorage.setItem('uid', null);
                 var message = xhr.responseJSON;
                 console.log('status',xhr.status);
                 alert(message.message);
                 $('#modal1').modal('open');
+
             }
         });
         

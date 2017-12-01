@@ -27,7 +27,7 @@
             <label class="label-icon" for="search">
               <i class="material-icons">search</i>
             </label>
-            <i class="material-icons">close</i>
+            <i class="material-icons" id="deleteTerm">close</i>
           </div>
         </form>
       </div>
@@ -83,11 +83,17 @@
       <div class="modal-content">
         <h4>Editar invitado</h4>
         <form id="form-edit">
+           <div class="row" style="display: none;">
+                <div class="input-field col s12">
+                  <input  id="idEditar" type="text" >
+                </div>
+           </div>
           <div class="row">
             <div class="input-field col s12">
               <input placeholder="Jhon Doe" id="first_name_edit" type="text" class="validate">
               <label for="first_name">Nombre</label>
             </div>
+          </div>
             <div class="row">
               <div class="input-field col s12">
                 <input placeholder="9991234567" id="phone_edit" type="number" class="validate" data-length="10">
@@ -109,30 +115,11 @@
                  </select>
               </div>
             </div>
-          </div>
-        </form>
-      </div>
+          </form>
+        </div>
       <div class="modal-footer">
         <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat" id="editar">Aceptar</a>
         <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
-      </div>
-    </div>
-    <!-- Modal de enviar invitaciones -->
-    <div id="modal2" class="modal">
-      <div class="modal-content">
-        <h4>Enviar invitaciones</h4>
-        <p>¿Está seguro que desea enviar invitaciones a
-          <strong>todos?</strong>
-        </p>
-        <br>
-        <div class="progress">
-          <div class="indeterminate"></div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" id="enviar" class="modal-action modal-close waves-effect waves-green btn-flat green" style="color:white; width:50%;">Enviar</button>
-          <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat red" style="color:white; width:50%;">Cancelar</a>
-        </div>
-
       </div>
     </div>
   </div>
