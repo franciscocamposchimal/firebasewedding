@@ -1,6 +1,4 @@
 
- var firebaseDatas = [];
- var arrayInvitados= 0;
 
 $(document).ready(function () {
 
@@ -8,9 +6,6 @@ $(document).ready(function () {
         e.preventDefault();
     });
     $("#deleteTerm").on("click",deleteTerm);
-    $('input#phone').characterCounter();
-    $('input#phone_edit').characterCounter();
-    $('select').material_select();
     mostrarDatos();
     buscar();
     $('#agregar').on("click",agregarDatos);
@@ -26,8 +21,6 @@ $(document).ready(function () {
 });
 
 function templateInvitado(snap) {
-    var checkId = 'iconoCheck' + snap._id;
-    var dataUpdate = Object.assign({_id: snap._id}, snap);
 
     var icono = "access_time";
     var iconoCheck = "check_box_outline_blank";
@@ -36,11 +29,6 @@ function templateInvitado(snap) {
         icono = "done";
      } else if (snap.asistencia == 2) {
         icono = "not_interested";
-      }
-      if (snap.asistencia == 1){
-           var dato = parseInt(snap.invitados);
-           arrayInvitados = arrayInvitados + dato ;
-      $("#invitadosTotales > li > div > strong").text(arrayInvitados);
       }
       var filasMostrar = "";
       filasMostrar += '<li class="collection-item padre-li" id="remove' + snap._id + '" >' +
@@ -83,8 +71,6 @@ function templateInvitado(snap) {
 
 function mostrarDatos() {
     var token = localStorage.getItem('uid');
-    console.log('token recuperado:', token);
- 
         $.ajax({
             type: 'GET',
             url: 'https://wedding-planning-api.herokuapp.com/api/invitados',
@@ -92,7 +78,7 @@ function mostrarDatos() {
             success: function (data) {
                 //console.log("Invitados", data.invitados);
                 $.each(data.invitados, function( index, snap ) {
-                    console.log(snap);
+                  //  console.log(snap);
                   templateInvitado(snap);
                   });
             },
@@ -100,7 +86,7 @@ function mostrarDatos() {
                 var message = xhr.responseJSON;
                 console.log('status',xhr.status);
                 alert(`No te has logueado correctamente: ${message.message}`);
-                window.location.replace("http://localhost:5000/");
+                window.location.replace("https://wedding-planning-2017.firebaseapp.com/");
             }
         });
  }
@@ -237,3 +223,8 @@ function deleteTerm(e) {
     $('#search').val("");
     $("#datos > li").removeClass("hidden");
 }
+
+function logOut() {
+    localStorage.clear();
+    window.location.replace("https://wedding-planning-2017.firebaseapp.com/");
+  }

@@ -1,0 +1,32 @@
+[debug] [2017-12-05T22:40:17.345Z] ----------------------------------------------------------------------
+[debug] [2017-12-05T22:40:17.347Z] Command:       /usr/local/bin/node /usr/local/bin/firebase serve
+[debug] [2017-12-05T22:40:17.347Z] CLI Version:   3.16.0
+[debug] [2017-12-05T22:40:17.347Z] Platform:      linux
+[debug] [2017-12-05T22:40:17.347Z] Node Version:  v9.2.0
+[debug] [2017-12-05T22:40:17.348Z] Time:          Tue Dec 05 2017 16:40:17 GMT-0600 (CST)
+[debug] [2017-12-05T22:40:17.348Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2017-12-05T22:40:17.359Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2017-12-05T22:40:17.360Z] > authorizing via signed-in user
+[debug] [2017-12-05T22:40:17.362Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/wedding-planning-2017  
+  
+ Tue Dec 05 2017 16:40:17 GMT-0600 (CST)
+[debug] [2017-12-05T22:40:17.875Z] <<< HTTP RESPONSE 200
+[debug] [2017-12-05T22:40:17.876Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/wedding-planning-2017/tokens  
+  
+ Tue Dec 05 2017 16:40:17 GMT-0600 (CST)
+[debug] [2017-12-05T22:40:18.360Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/home/francisco/Documentos/wedding/firebasewedding'...
+[info] 
+[debug] [2017-12-05T22:40:18.368Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/wedding-planning-2017  
+  
+ Tue Dec 05 2017 16:40:18 GMT-0600 (CST)
+[debug] [2017-12-05T22:40:18.814Z] <<< HTTP RESPONSE 200
+[debug] [2017-12-05T22:40:18.820Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/383924029598/clients/_:getWebAppConfig  
+  
+ Tue Dec 05 2017 16:40:18 GMT-0600 (CST)
+[debug] [2017-12-05T22:40:19.299Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: public
+[info] ✔  hosting: Local server: http://localhost:5000
+

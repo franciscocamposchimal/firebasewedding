@@ -8,8 +8,15 @@ $(document).ready(function () {
     var session = localStorage.getItem('uid');
     console.log('Localstorage contiene: ', session);
 
-    $('#modal1').modal('open');
+    if(session == null){
+        $('#modal1').modal('open');
+        loginSession();   
+    }
 
+   
+});
+
+function loginSession(){
     $('#login').on("click", function (event) {
         event.preventDefault();
         var user = $('#user').val();
@@ -26,7 +33,7 @@ $(document).ready(function () {
                 localStorage.setItem('uid', JSON.stringify(data.token));
             },
             error: function (xhr, status, errorThrown) {
-                localStorage.setItem('uid', null);
+                localStorage.clear();
                 var message = xhr.responseJSON;
                 console.log('status',xhr.status);
                 alert(message.message);
@@ -36,4 +43,4 @@ $(document).ready(function () {
         });
         
     });
-});
+}

@@ -18,21 +18,27 @@
 
   <div class="container">
 
-  <div id="app">
-    <nav>
-      <div class="nav-wrapper black-opacity">
-        <form id="search-form" action="#" method="">
-          <div class="input-field">
-            <input id="search" type="search" required>
-            <label class="label-icon" for="search">
-              <i class="material-icons">search</i>
-            </label>
-            <i class="material-icons" id="deleteTerm">close</i>
-          </div>
-        </form>
-      </div>
-    </nav>
-  </div>
+      <div class="row">  
+          <nav>
+              <div class="black-opacity col s1 l1" style="height: 100%;">
+                  <a href="https://wedding-planning-2017.firebaseapp.com/" ><i class="material-icons">keyboard_backspace</i></a>
+              </div>
+            <div class="nav-wrapper black-opacity col s10 l10">
+                <form id="search-form" action="#" method="">
+                    <div class="input-field">
+                      <input id="search" type="search" required>
+                        <label class="label-icon" for="search">
+                         <i class="material-icons">search</i>
+                        </label>
+                      <i class="material-icons" id="deleteTerm">close</i>
+                    </div>
+                </form>
+            </div>
+            <div class="black-opacity col s1 l1" style="height: 100%;">
+                <a href="#" onclick="logOut();return false;" ><i class="material-icons">exit_to_app</i></a>
+            </div>
+          </nav>
+        </div>
 
     <ul id="datos" class="collection" style="overflow: visible !important;">
     </ul>
